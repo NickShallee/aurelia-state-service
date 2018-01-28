@@ -1,0 +1,16 @@
+<template>
+  <div if.bind="personService.getPersonAfter3_isBusy">
+    Loading persons
+  </div>
+  <div if.bind="!personService.getPersonAfter3_isBusy && !personService.getPersonAfter3_hasError" repeat.for="person of listOfPersons">
+    ID: ${person.id} NAME: ${person.name}
+  </div>
+
+
+  <div if.bind="personService.createSomeErrorAfter2_isBusy">
+    making another call
+  </div>
+  <div if.bind="personService.createSomeErrorAfter2_hasError">
+    ${personService.createSomeErrorAfter2_hasError}
+  </div>
+</template>
