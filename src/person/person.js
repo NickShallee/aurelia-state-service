@@ -2,34 +2,33 @@ import { inject } from 'aurelia-framework';
 import { PersonService } from './person-service';
 
 @inject(PersonService)
-export class Person
-{
-    personService;
-    listOfPersons;
+export class Person {
+  personService;
+  listOfPersons;
 
-    constructor(personService)
-    {
-        this.personService = personService;
-    }
+  constructor(personService) {
 
-    attached()
-    {
-        this.personService.getPersonAfter3()
-          .then(persons => this.listOfPersons = persons);
-      
-      
-        this.personService.createSomeErrorAfter2()
-          .then(() =>
-          {
-            //will never get here.
-          })
-          .catch(e =>
-          {
-            //do whaterver?
-          });
-    }
+    this.personService = personService;
 
-    //add
-    //remove
-    //etc.
+  }
+
+  attached() {
+
+    this.personService.getPersons()
+      .then(persons => this.listOfPersons = persons)
+      .catch(e => {
+        // Handle errors
+      });
+
+    this.personService.getPersonsError()
+      .then(persons => this.listOfPersons = persons)
+      .catch(e => {
+        // Handle errors
+      });
+    
+  }
+
+  //add
+  //remove
+  //etc.
 }

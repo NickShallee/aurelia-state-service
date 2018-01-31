@@ -1,16 +1,16 @@
 <template>
-  <div if.bind="personService.getPersonAfter3_isBusy">
-    Loading persons
+  <div if.bind="personService.getPersons_isBusy">
+    Loading persons from persons.json
   </div>
-  <div if.bind="!personService.getPersonAfter3_isBusy && !personService.getPersonAfter3_hasError" repeat.for="person of listOfPersons">
+  <div if.bind="!personService.getPersons_isBusy && !personService.getPersons_hasError" repeat.for="person of listOfPersons">
     ID: ${person.id} NAME: ${person.name}
   </div>
 
 
-  <div if.bind="personService.createSomeErrorAfter2_isBusy">
-    making another call
+  <div if.bind="personService.getPersonsError_isBusy">
+    making a call to a non-existent JSON file
   </div>
-  <div if.bind="personService.createSomeErrorAfter2_hasError">
-    ${personService.createSomeErrorAfter2_hasError}
+  <div if.bind="personService.getPersonsError_hasError">
+    ${personService.getPersonsError_hasError}
   </div>
 </template>

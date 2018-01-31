@@ -1,31 +1,33 @@
 import { StateService } from 'resources/services/state-service';
 
-export class PersonService extends StateService
-{
-    getPersonAfter3()
-    {
-        let persons = [
-            { id: 1, name: "avraham" },
-            { id: 2, name: "nick" }
-        ];
+export class PersonService extends StateService {
 
-        return new Promise((resolve, reject) =>
-        {
-            setTimeout(() =>
-            {
-                resolve(persons);
-            }, 3000);
-        });
-    }
-  
-  createSomeErrorAfter2()
-  {
-    return new Promise((resolve, reject) =>
-        {
-            setTimeout(() =>
-            {
-                reject(new Error('Some error'));
-            }, 2000);
-        });
+  getPersons() {
+
+    return this.httpClient.fetch('persons.json')
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      })
+      .catch(e => {
+        this.logger.error(e.message);
+        throw e;
+      });
+
   }
+  
+  getPersonsError() {
+
+    return this.httpClient.fetch('no-file.json')
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      })
+      .catch(e => {
+        this.logger.error(e.message);
+        throw e;
+      });
+
+  }
+
 }
